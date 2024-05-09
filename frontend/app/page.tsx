@@ -1,6 +1,11 @@
 import GameSearch from "./components/GameSearch";
 
-export default function Home() {
+const GET_DATA = "http://localhost:3000/games"; // No env variables config needed since it's a simple application
+
+export default async function Home() {
+  const response = await fetch(GET_DATA, { cache: 'force-cache' });
+  const games = await response.json();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="container mx-auto p-4">
@@ -15,7 +20,7 @@ export default function Home() {
             all ages.
           </p>
         </div>
-        <GameSearch />
+        <GameSearch games={games}/>
       </div>
     </main>
   );

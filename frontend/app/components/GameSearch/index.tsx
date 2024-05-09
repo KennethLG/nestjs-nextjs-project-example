@@ -1,29 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "../List";
+import { Game } from "@/app/entities/game";
+// import { GAMES } from "@/app/mock/games";
 
-const games = [
-  { id: 1, title: "The Legend of Zelda: Breath of the Wild" },
-  { id: 2, title: "Super Mario Odyssey" },
-  { id: 3, title: "God of War" },
-  { id: 4, title: "Red Dead Redemption 2" },
-  { id: 5, title: "Castlevania: Symphony of the Night" },
-];
 
-const GameSearch = () => {
+type GameSearchProps = {
+  games: Game[]
+}
+
+const GameSearch = ({ games }: GameSearchProps) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredGames, setFilteredGames] = useState<Game[]>([]);
 
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    setFilteredGames(games.filter((game) =>
+      game.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      game.description.toLowerCase().includes(searchTerm.toLowerCase())
+    ));
+  }, [games, searchTerm]);
 
   return (
     <>
       <input
         type="text"
         className="w-full my-5 px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-800 dark:text-white focus:outline-none focus:border-blue-500"
-        placeholder="Search by game title..."
+        placeholder="Search by game title or description..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

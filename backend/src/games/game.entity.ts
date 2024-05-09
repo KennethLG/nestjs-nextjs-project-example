@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'game' })
+@Entity()
 export class Game {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({ length: 255 })
   title: string;
+
+  @Column('text', { nullable: true })
+  description: string | null;
 }

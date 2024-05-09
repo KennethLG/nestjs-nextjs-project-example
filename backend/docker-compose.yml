@@ -7,6 +7,8 @@ services:
       - '3000:3000'
     depends_on:
       - mysql
+    links:
+      - mysql
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
