@@ -1,6 +1,6 @@
 # Technical Test Result
 
-This project is the result of a technical test. It consists of a simple application with a frontend and a backend.
+This project is the result of a technical test. It consists of a simple application that shows a list of my favorite videogames including a search bar to filter by name or description.
 
 ## Getting Started
 
